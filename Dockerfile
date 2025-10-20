@@ -8,7 +8,7 @@ COPY backend/package*.json ./backend/
 
 # Install ALL dependencies (including devDependencies for building)
 WORKDIR /app/backend
-RUN npm ci
+RUN npm install
 
 # Copy backend source
 COPY backend/ ./
@@ -65,7 +65,7 @@ WORKDIR /app/backend
 
 # Copy package files and install ONLY production dependencies
 COPY backend/package*.json ./
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 # Copy built code from builder stage
 COPY --from=builder /app/backend/dist ./dist
