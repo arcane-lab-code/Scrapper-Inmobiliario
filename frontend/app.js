@@ -1,7 +1,5 @@
-// Configuration
-const API_URL = window.location.hostname === 'localhost'
-    ? 'http://localhost:3000/api'
-    : '/api';
+// Configuration - always use relative path for API
+const API_URL = '/api';
 
 // Tab switching
 document.querySelectorAll('.tab-btn').forEach(btn => {

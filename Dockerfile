@@ -46,7 +46,6 @@ WORKDIR /app
 
 # Copy package files
 COPY backend/package*.json ./backend/
-COPY frontend/package*.json ./frontend/ 2>/dev/null || true
 
 # Install backend dependencies
 WORKDIR /app/backend
@@ -54,6 +53,9 @@ RUN npm install
 
 # Copy backend source
 COPY backend/ ./
+
+# Copy frontend to serve static files
+COPY frontend/ /app/frontend/
 
 # Build backend
 RUN npm run build

@@ -95,12 +95,26 @@ app.use((err: any, req: Request, res: Response, next: any) => {
   });
 });
 
-// 404 handler
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, '../../frontend')));
+
+// Serve frontend for root path
+app.get('/', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '../../frontend/index.html'));
+});
+
+// 404 handler (for non-API routes)
 app.use((req: Request, res: Response) => {
-  res.status(404).json({
-    success: false,
-    error: 'Not found',
-  });
+  // If it's an API route, return JSON
+  if (req.path.startsWith('/api/')) {
+    res.status(404).json({
+      success: false,
+      error: 'API endpoint not found',
+    });
+  } else {
+    // Otherwise, serve the frontend
+    res.sendFile(path.join(__dirname, '../../frontend/index.html'));
+  }
 });
 
 // Initialize services
