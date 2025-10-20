@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrapper Inmobiliario - Panel de Control</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏠 Scrapper Inmobiliario</h1>
+            <p>Sistema de scraping automatizado de portales inmobiliarios</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="searches">Búsquedas</button>
+            <button class="tab-btn" data-tab="new-search">Nueva Búsqueda</button>
+            <button class="tab-btn" data-tab="scheduler">Tareas Programadas</button>
+            <button class="tab-btn" data-tab="stats">Estadísticas</button>
+        </nav>
+
+        <!-- Searches Tab -->
+        <div id="searches-tab" class="tab-content active">
+            <h2>Búsquedas Configuradas</h2>
+            <div id="searches-list" class="searches-list"></div>
+        </div>
+
+        <!-- New Search Tab -->
+        <div id="new-search-tab" class="tab-content">
+            <h2>Crear Nueva Búsqueda</h2>
+            <form id="new-search-form" class="search-form">
+                <div class="form-group">
+                    <label for="search-name">Nombre de la búsqueda</label>
+                    <input type="text" id="search-name" required placeholder="Ej: Madrid Centro Alquiler">
+                </div>
+
+                <div class="form-group">
+                    <label for="portal">Portal</label>
+                    <select id="portal" required>
+                        <option value="idealista">Idealista</option>
+                        <option value="fotocasa" disabled>Fotocasa (próximamente)</option>
+                        <option value="tecnocasa" disabled>Tecnocasa (próximamente)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="search-type">Tipo de búsqueda</label>
+                    <select id="search-type" required>
+                        <option value="rent">Alquiler</option>
+                        <option value="sale">Venta</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Ubicación</label>
+                    <input type="text" id="location" required placeholder="Ej: madrid-ciudad">
+                </div>
+
+                <div class="form-group">
+                    <label for="zone">Zona (opcional)</label>
+                    <input type="text" id="zone" placeholder="Ej: dentro-m30">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="price-min">Precio mínimo (€)</label>
+                        <input type="number" id="price-min" placeholder="800">
+                    </div>
+                    <div class="form-group">
+                        <label for="price-max">Precio máximo (€)</label>
+                        <input type="number" id="price-max" placeholder="1500">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rooms">Habitaciones (separadas por coma)</label>
+                    <input type="text" id="rooms" placeholder="2,3">
+                </div>
+
+                <div class="form-group">
+                    <label for="property-type">Tipo de inmueble</label>
+                    <select id="property-type">
+                        <option value="">Todos</option>
+                        <option value="piso">Piso</option>
+                        <option value="casa">Casa</option>
+                        <option value="chalet">Chalet</option>
+                        <option value="atico">Ático</option>
+                        <option value="estudio">Estudio</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sheets-url">URL de Google Sheets</label>
+                    <input type="url" id="sheets-url" placeholder="https://docs.google.com/spreadsheets/d/...">
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="use-proxy">
+                        Usar proxy para ocultar IP
+                    </label>
+                    <label>
+                        <input type="checkbox" id="scrape-details">
+                        Scrapear detalles completos
+                    </label>
+                    <label>
+                        <input type="checkbox" id="scrape-contact">
+                        Scrapear información de contacto
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="enable-schedule">
+                        Programar ejecución automática
+                    </label>
+                </div>
+
+                <div id="schedule-config" class="form-group" style="display: none;">
+                    <label for="cron-expression">Expresión Cron</label>
+                    <input type="text" id="cron-expression" placeholder="0 9 * * *">
+                    <small>Ejemplos: "0 9 * * *" = todos los días a las 9:00</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear Búsqueda</button>
+            </form>
+        </div>
+
+        <!-- Scheduler Tab -->
+        <div id="scheduler-tab" class="tab-content">
+            <h2>Tareas Programadas</h2>
+            <div id="scheduler-list" class="scheduler-list"></div>
+        </div>
+
+        <!-- Stats Tab -->
+        <div id="stats-tab" class="tab-content">
+            <h2>Estadísticas</h2>
+            <div id="stats-content" class="stats-content"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

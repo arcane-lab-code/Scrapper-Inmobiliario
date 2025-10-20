@@ -1,0 +1,33 @@
+{
+  "name": "Madrid Centro Alquiler",
+  "portal": "idealista",
+  "searchType": "rent",
+  "filters": {
+    "searchType": "rent",
+    "location": "madrid-ciudad",
+    "zone": "dentro-m30",
+    "priceMin": 800,
+    "priceMax": 1500,
+    "rooms": [2, 3],
+    "bathrooms": 1,
+    "propertyType": "piso",
+    "onlyWithPhotos": true
+  },
+  "scraper": {
+    "engine": "puppeteer",
+    "useProxy": false,
+    "headless": true,
+    "scrapeDetails": true,
+    "scrapeContactInfo": false,
+    "rateLimitMs": 2000
+  },
+  "schedule": {
+    "enabled": true,
+    "cron": "0 9 * * *",
+    "timezone": "Europe/Madrid"
+  },
+  "output": {
+    "googleSheetsUrl": "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit",
+    "notifyEmail": "your-email@example.com"
+  }
+}
