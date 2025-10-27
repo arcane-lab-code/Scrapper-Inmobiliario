@@ -7,6 +7,8 @@ import {
   PropertyListing,
 } from './portals/portal.interface';
 import { IdealistaScraper } from './portals/idealista.scraper';
+import { MockScraper } from './portals/mock.scraper';
+import { TecnocasaScraper } from './portals/tecnocasa.scraper';
 
 /**
  * Central hub for managing scraping operations
@@ -21,7 +23,12 @@ export class ScrapingHub {
     this.registerEngine('puppeteer', PuppeteerEngine);
 
     // Register available portals
-    this.registerPortal('idealista', new IdealistaScraper());
+    // NOTE: Using mock scraper by default for testing without real scraping
+    this.registerPortal('mock', new MockScraper());
+    this.registerPortal('tecnocasa', new TecnocasaScraper());
+
+    // Real scrapers (disabled for now)
+    // this.registerPortal('idealista', new IdealistaScraper());
 
     console.log('[ScrapingHub] Initialized with engines and portals');
   }
