@@ -1,5 +1,7 @@
 import { ScraperEngine, EngineConfig } from './engines/scraper.interface';
-import { PuppeteerEngine } from './engines/puppeteer.engine';
+// NOTE: PuppeteerEngine disabled - not needed for MockScraper
+// import { PuppeteerEngine } from './engines/puppeteer.engine';
+import { DummyEngine } from './engines/dummy.engine';
 import {
   PortalScraper,
   SearchFilters,
@@ -20,7 +22,9 @@ export class ScrapingHub {
 
   constructor() {
     // Register available engines
-    this.registerEngine('puppeteer', PuppeteerEngine);
+    // Using DummyEngine as default for MockScraper (no browser needed)
+    this.registerEngine('dummy', DummyEngine);
+    this.registerEngine('puppeteer', DummyEngine); // Alias for backwards compatibility
 
     // Register available portals
     // NOTE: Using mock scraper by default for testing without real scraping
